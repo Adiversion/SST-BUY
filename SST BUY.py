@@ -39,15 +39,8 @@ df = pd.DataFrame(positions['data'])
 df = df[df['symbol'].isin(portfolio.keys())][['symbol', 'lastPrice']]
 df['bought_price'] = df['symbol'].map(portfolio)
 df['diff_price'] = (df['lastPrice'].astype(float) - df['bought_price'].astype(float))
-df['percentage_changes'] = (df['bought_price'].astype(float) / df['diff_price'].astype(float))/10
+df['percentage_changes'] = (df['diff_price'].astype(float) / df['bought_price'].astype(float))*100
 # Format the percentages changes to display 2 decimal places
 df['percentage_changes'] = df['percentage_changes'].apply(
                                 lambda x: '{0:.2f}%'.format(x))
-df.to_csv('result.csv', index=False)
-
-
-# In[ ]:
-
-
-
-
+df.to_csv('result.csv', index=False
